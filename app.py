@@ -4,7 +4,7 @@ import pandas as pd
 import requests
 from io import StringIO
 
-st.title("📊 Multi-Sheet Viewer (different URLs)")
+st.title("📊 Haleon Awareness Tool")
 
 # Dictionary of sheet names → URLs
 SHEETS = {
