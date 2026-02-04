@@ -78,7 +78,10 @@ if sheet_name == "Report":
 
     df_t.loc['Last Seen'] = last_seen_row
 
-    avg_row = (df_t.loc['Sum'] / df_t.loc['Days Installed']).round(3)
+    avg_row = (
+    pd.to_numeric(df_t.loc["Sum"], errors="coerce") /
+    pd.to_numeric(df_t.loc["Days Installed"], errors="coerce")
+).round(3)
     df_t.loc['Average'] = avg_row
 
     st.dataframe(df_t, use_container_width=True)
