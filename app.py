@@ -9,7 +9,7 @@ st.title("📊 Haleon Awareness Tool")
 # Dictionary of sheet names 
 SHEETS = {
     "RealTime": "https://awarenesstool.azurewebsites.net/api/DatabaseBridge/GetAllReport?s=2hp2wNIDkzVgfwxak5719VtGn8FE1VQG90KHuh1tjJsOYjNI",
-    "Report": "https://gist.githubusercontent.com/dimijaf/41ded8133ff12eceb0f18138a0073df7/raw/c79a9875654a6d05c4aa0aa0fd2efaceb4524c01/gistfile1.txt"
+    "Report": "https://gist.githubusercontent.com/dimijaf/41ded8133ff12eceb0f18138a0073df7/raw/c79a9875654a6d05c4aa0aa0fd2efaceb4524c01/gistfile1.txt",
     "Questions": "https://gist.githubusercontent.com/dimijaf/e99a58d038caf51caf1a059313a4b5c7/raw/c30007aa7a11b74b7f247c62df7f00419a1f618a/gistfile1.txt"
 }
 def load_data(url):
