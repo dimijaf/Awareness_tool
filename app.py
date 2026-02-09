@@ -22,11 +22,22 @@ for name, url in SHEETS.items():
         st.session_state[name] = load_data(url)
 
 #sheet_name = st.selectbox("Select Sheet", list(SHEETS.keys()))
+
 tabs = st.tabs(list(SHEETS.keys()))
-for i, name in enumerate(SHEETS.keys()):
+
+for i, sheet_name in enumerate(SHEETS.keys()):
     with tabs[i]:
-        sheet_name = name
         url = SHEETS[sheet_name]
+
+        if sheet_name not in st.session_state:
+            st.session_state[sheet_name] = load_data(url)
+
+        if st.button(f"🔄 Refresh {sheet_name}", key=f"refresh_{sheet_name}"):
+            st.session_state[sheet_name] = load_data(url)
+
+        df = st.session_state[sheet_name]
+        st.dataframe(df, use_container_width=True)
+
 #url = SHEETS[sheet_name]
 
 if sheet_name not in st.session_state:
