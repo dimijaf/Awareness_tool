@@ -36,7 +36,8 @@ for i, sheet_name in enumerate(SHEETS.keys()):
             st.session_state[sheet_name] = load_data(url)
 
         df = st.session_state[sheet_name]
-        st.dataframe(df, use_container_width=True)
+        if sheet_name != "Report":
+            st.dataframe(df, use_container_width=True)
     
         st.session_state["RealTime"]['QuestionnaireDate'] = pd.to_datetime(
             st.session_state["RealTime"]['QuestionnaireDate'], 
