@@ -110,7 +110,7 @@ for i, sheet_name in enumerate(SHEETS.keys()):
                     total_count = q_col.notna().sum()
                     
                     df.loc[idx, 'NAI_Count'] = nai_count
-                    df.loc[idx, 'NAI_%'] = round((nai_count / total_count * 100), 1) if total_count > 0 else 0
+                    df.loc[idx, 'NAI_%'] = round((nai_count / total_count * 100), 2) if total_count > 0 else 0
             
             st.dataframe(df, use_container_width=True, height=600)
 #url = SHEETS[sheet_name]
