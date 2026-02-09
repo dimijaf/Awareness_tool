@@ -5,7 +5,7 @@ import requests
 from io import StringIO
 
 st.title("📊 Haleon Awareness Tool")
-
+st.set_page_config(layout="wide") 
 # Dictionary of sheet names 
 SHEETS = {
     "Report": "https://gist.githubusercontent.com/dimijaf/41ded8133ff12eceb0f18138a0073df7/raw/c79a9875654a6d05c4aa0aa0fd2efaceb4524c01/gistfile1.txt",
