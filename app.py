@@ -103,8 +103,8 @@ for i, sheet_name in enumerate(SHEETS.keys()):
     # Count NAI for each Q1, Q2, etc. column from RealTime
             for q_name in question_names:
                 if q_name in realtime.columns:  # Check if Q1, Q2 etc exists in RealTime
-                    # Count NAI responses (assuming NAI is 1 or "NAI")
-                    nai_count = (realtime[q_name] == 1).sum()  # or realtime[q_name].eq('NAI').sum()
+                    #
+                    nai_count = (realtime[q_name] == 1).sum()  # or realtime[q_name].eq('ΝΑΙ').sum()
                     total_count = realtime[q_name].notna().sum()
                     
                     df.loc[q_name, 'NAI_Count'] = nai_count
