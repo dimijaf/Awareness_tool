@@ -61,17 +61,6 @@ for i, sheet_name in enumerate(SHEETS.keys()):
             realtime = st.session_state["RealTime"]
             last_seen_row = pd.Series('', index=df_t.columns, name='Last Seen')
             device_ids_row = df_t.loc['DeviceId']  # Exact row name
-           if sheet_name == "Questions":
-               realtime = st.session_state["RealTime"]
-               nai_counts = realtime[realtime['NAI'] == 1].groupby('Question').size()
-               total_counts = realtime.groupby('Question').size()
-               df['NAI_Count'] = 0
-               df['NAI_%'] = 0.0
-               for q_name in df.index:  # or df.columns if questions are columns
-                   if q_name in nai_counts.index:
-                       df.loc[q_name, 'NAI_Count'] = nai_counts[q_name]
-                       df.loc[q_name, 'NAI_%'] = round((nai_counts[q_name] / total_counts[q_name]) * 100, 1)
-               st.dataframe(df, use_container_width=True) 
             
             for device_id in device_ids_row.index:  # Loop through DeviceIDs row
                 device_id_val = str(device_ids_row[device_id]).strip()
@@ -105,7 +94,17 @@ for i, sheet_name in enumerate(SHEETS.keys()):
                     for col in df_t.columns
                 }
             )
-
+        if sheet_name == "Questions":
+            realtime = st.session_state["RealTime"]
+            nai_counts = realtime[realtime['NAI'] == 1].groupby('Question').size()
+            total_counts = realtime.groupby('Question').size()
+            df['NAI_Count'] = 0
+            df['NAI_%'] = 0.0
+            for q_name in df.index:  # or df.columns if questions are columns
+                if q_name in nai_counts.index:
+                    df.loc[q_name, 'NAI_Count'] = nai_counts[q_name]
+                    df.loc[q_name, 'NAI_%'] = round((nai_counts[q_name] / total_counts[q_name]) * 100, 1)
+                    st.dataframe(df, use_container_width=True) 
 
 #url = SHEETS[sheet_name]
 
