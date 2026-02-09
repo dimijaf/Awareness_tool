@@ -96,16 +96,21 @@ for i, sheet_name in enumerate(SHEETS.keys()):
             )
         if sheet_name == "Questions":
             realtime = st.session_state["RealTime"]
-            nai_counts = realtime[realtime['NAI'] == 1].groupby('Question').size()
-            total_counts = realtime.groupby('Question').size()
+            question_names = df.index.tolist()
             df['NAI_Count'] = 0
             df['NAI_%'] = 0.0
-            for q_name in df.index:  # or df.columns if questions are columns
-                if q_name in nai_counts.index:
-                    df.loc[q_name, 'NAI_Count'] = nai_counts[q_name]
-                    df.loc[q_name, 'NAI_%'] = round((nai_counts[q_name] / total_counts[q_name]) * 100, 1)
-                    st.dataframe(df, use_container_width=True) 
-
+    
+    # Count NAI for each Q1, Q2, etc. column from RealTime
+            for q_name in question_names:
+                if q_name in realtime.columns:  # Check if Q1, Q2 etc exists in RealTime
+                    # Count NAI responses (assuming NAI is 1 or "NAI")
+                    nai_count = (realtime[q_name] == 1).sum()  # or realtime[q_name].eq('NAI').sum()
+                    total_count = realtime[q_name].notna().sum()
+                    
+                    df.loc[q_name, 'NAI_Count'] = nai_count
+                    df.loc[q_name, 'NAI_%'] = round((nai_count / total_count * 100), 1) if total_count > 0 else 0
+            
+            st.dataframe(df, use_container_width=True, height=600)
 #url = SHEETS[sheet_name]
 
 
