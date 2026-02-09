@@ -3,7 +3,7 @@ import streamlit as st
 import pandas as pd
 import requests
 from io import StringIO
-
+st.logo("haleon_logo.png")
 st.title("📊 Haleon Awareness Tool")
 st.set_page_config(layout="wide") 
 # Dictionary of sheet names 
