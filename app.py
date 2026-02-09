@@ -21,8 +21,13 @@ for name, url in SHEETS.items():
     if name not in st.session_state:
         st.session_state[name] = load_data(url)
 
-sheet_name = st.selectbox("Select Sheet", list(SHEETS.keys()))
-url = SHEETS[sheet_name]
+#sheet_name = st.selectbox("Select Sheet", list(SHEETS.keys()))
+tabs = st.tabs(list(SHEETS.keys()))
+for i, name in enumerate(SHEETS.keys()):
+    with tabs[i]:
+        sheet_name = name
+        url = SHEETS[sheet_name]
+#url = SHEETS[sheet_name]
 
 if sheet_name not in st.session_state:
     st.session_state[sheet_name] = load_data(url)
