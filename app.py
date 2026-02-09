@@ -77,7 +77,7 @@ for i, sheet_name in enumerate(SHEETS.keys()):
                                     ).round(3)
                                     df_t.loc['Average'] = avg_row
                                     st.dataframe(df_t, use_container_width=True)
-                                                 else:
+                                else:
                                     st.dataframe(df, use_container_width=True)
 
 #url = SHEETS[sheet_name]
