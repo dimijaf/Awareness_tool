@@ -37,21 +37,17 @@ for i, sheet_name in enumerate(SHEETS.keys()):
 
         df = st.session_state[sheet_name]
         st.dataframe(df, use_container_width=True)
-
-#url = SHEETS[sheet_name]
-
-if sheet_name not in st.session_state:
-    st.session_state[sheet_name] = load_data(url)
-
-if st.button(f"🔄 Refresh {sheet_name}"):
-    st.session_state[sheet_name] = load_data(url)
-
-
-df = st.session_state[sheet_name]
-st.session_state["RealTime"]['QuestionnaireDate'] = pd.to_datetime(
+        st.session_state["RealTime"]['QuestionnaireDate'] = pd.to_datetime(
     st.session_state["RealTime"]['QuestionnaireDate'], 
     errors='coerce'
 ).dt.strftime('%d/%m/%y')
+
+#url = SHEETS[sheet_name]
+
+
+
+####df = st.session_state[sheet_name]
+
 
 if sheet_name == "Report":
     counts = st.session_state["RealTime"]["DeviceId"].astype(str).value_counts()
