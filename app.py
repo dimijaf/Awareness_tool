@@ -79,8 +79,15 @@ for i, sheet_name in enumerate(SHEETS.keys()):
                 pd.to_numeric(df_t.loc["Days Installed"], errors="coerce")
             ).round(3)
             df_t.loc['Average'] = avg_row
+            styled_df = df_t.style.set_properties(
+                **{
+                    'background-color': 'black',
+                    'color': 'white',
+                    'font-weight': 'bold'
+                }
+            )
             st.dataframe(
-                df_t, 
+                styled_df, 
                 height=1000, 
                 use_container_width=True,
                 column_config={
