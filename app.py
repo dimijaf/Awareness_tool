@@ -79,7 +79,7 @@ for i, sheet_name in enumerate(SHEETS.keys()):
                 pd.to_numeric(df_t.loc["Days Installed"], errors="coerce")
             ).round(3)
             df_t.loc['Average'] = avg_row
-            st.dataframe(df_t, height=1200, use_container_width=True)
+            st.dataframe(df_t, height=1000, use_container_width=True)
 
 
 #url = SHEETS[sheet_name]
