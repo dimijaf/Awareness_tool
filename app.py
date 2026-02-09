@@ -41,15 +41,7 @@ for i, sheet_name in enumerate(SHEETS.keys()):
     st.session_state["RealTime"]['QuestionnaireDate'], 
     errors='coerce'
 ).dt.strftime('%d/%m/%y')
-
-#url = SHEETS[sheet_name]
-
-
-
-####df = st.session_state[sheet_name]
-
-
-if sheet_name == "Report":
+        if sheet_name == "Report":
     counts = st.session_state["RealTime"]["DeviceId"].astype(str).value_counts()
     
     # Transpose FIRST
@@ -100,6 +92,15 @@ if sheet_name == "Report":
     st.dataframe(df_t, use_container_width=True)
 else:
     st.dataframe(df, use_container_width=True)
+
+#url = SHEETS[sheet_name]
+
+
+
+####df = st.session_state[sheet_name]
+
+
+
 
     
     
