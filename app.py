@@ -84,15 +84,26 @@ for i, sheet_name in enumerate(SHEETS.keys()):
 
 
             for date_str in dates_5days:
-                date_avg = pd.Series(0, index=df_t.columns, name=f'Avg_{date_str}')
+                date_avg = pd.Series(0.0, index=df_t.columns, name=f'Avg_{date_str}')
                 for col in df_t.columns:
                     device_id = str(df_t.loc['DeviceId', col]).strip()
-                    date_data = realtime[
+                    install_date_str = str(df_t.loc['Installed Day', col]).strip()
+                    try:
+                        historical_date = datetime.strptime(date_str, '%d/%m/%y').date()
+                        install_date = datetime.strptime(install_date_str, '%d/%m/%y').date()
+                        days_up_to_date = (historical_date - install_date).days
+                    except:
+                        days_up_to_date = 0
+                    historical_data = realtime[
                         (realtime['DeviceId'].astype(str) == device_id) & 
                         (realtime['QuestionnaireDate'].str.contains(date_str))
                     ]
-                    if not date_data.empty:
-                        date_avg[col] = len(date_data)
+                    cum_sum = len(historical_data)
+
+                    date_avg[col] = round(cum_sum / days_up_to_date, 3) if days_up_to_date > 0
+
+            else 0
+               
                 df_t.loc[f'Avg_{date_str}'] = date_avg
 
             styled_df = df_t.style.set_properties(
