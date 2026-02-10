@@ -78,19 +78,21 @@ for i, sheet_name in enumerate(SHEETS.keys()):
                 pd.to_numeric(df_t.loc["Days Installed"], errors="coerce")
             ).round(3)
             df_t.loc['Avg_today'] = avg_row
+            
+            
+            
             from datetime import timedelta
             today = datetime.now().date()
-            dates_5days = [(today - timedelta(days=5*i)).strftime('%d/%m/%y') for i in range(8)]
+            dates_5days = [(today - timedelta(days=10*i)).strftime('%d/%m/%y') for i in range(10)]
 
-
-            for date_str in dates_5days:
+            for date_str in dates_10days:
                 date_avg = pd.Series(0.0, index=df_t.columns, name=f'Avg_{date_str}')
                 for col in df_t.columns:
                     device_id = str(df_t.loc['DeviceId', col]).strip()
                     install_date_str = str(df_t.loc['Installed Day', col]).strip()
                     try:
-                        historical_date = datetime.strptime(date_str, '%d/%m/%y').date()
-                        install_date = datetime.strptime(install_date_str, '%d/%m/%y').date()
+                        historical_date = datetime.strptime(date_str, '%m/%d/%y').date()
+                        install_date = datetime.strptime(install_date_str, '%m/%d/%y').date()
                         days_up_to_date = max((historical_date - install_date).days, 1)
                     except:
                         days_up_to_date = 1
