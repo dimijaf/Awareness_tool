@@ -96,7 +96,7 @@ for i, sheet_name in enumerate(SHEETS.keys()):
                         install_date = datetime.strptime(install_date_str, '%m/%d/%y').date()
                         days_installed_then = max((historical_date - install_date).days, 1)
                     except:
-                        days_up_to_date = 1
+                        days_installed_then = 1
 
 
                     historical_data = realtime[
