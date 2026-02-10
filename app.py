@@ -86,35 +86,35 @@ for i, sheet_name in enumerate(SHEETS.keys()):
             dates_10days = [(today - timedelta(days=10*i)).strftime('%d/%m/%y') for i in range(10)]
 
   
-            
             for date_str in dates_10days:
                 date_avg = pd.Series(0.0, index=df_t.columns, name=f'Avg_{date_str}')
-                
-    
                 for col in df_t.columns:
                     device_id = str(df_t.loc['DeviceId', col]).strip()
                     historical_data = realtime[
-                        (realtime['DeviceId'].astype(str) == device_id) & 
-                        realtime['QuestionnaireDate'].str.contains(date_str, na=False)
+                    (realtime['DeviceId'].astype(str) == device_id) & 
+                    realtime['QuestionnaireDate'].str.contains(date_str, na=False)
                     ]
-                    responses_that_day = len(historical_data)
+                    sum_up_to_date = len(historical_data)
                     install_date_str = str(df_t.loc['Installed Day', col]).strip()
-
-
-
-                    
                     try:
                         install_date = datetime.strptime(install_date_str, '%d/%m/%y').date()
                         historical_date = datetime.strptime(date_str, '%d/%m/%y').date()
                         days_installed = max((historical_date - install_date).days, 1)
                     except:
                         days_installed = 1
-
+            
+        
+    
+    
+        
+                
+    
+                
 
                     
                     
 
-                    date_avg[col] = round(responses_that_day / days_installed, 2)
+                    date_avg[col] = round(sum_up_to_date / days_installed, 2)
 
                
                 df_t.loc[f'Avg_{date_str}'] = date_avg
