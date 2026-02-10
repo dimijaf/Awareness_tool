@@ -100,7 +100,7 @@ for i, sheet_name in enumerate(SHEETS.keys()):
 
                     historical_data = realtime[
                     (realtime['DeviceId'].astype(str) == device_id) & 
-                    pd.to_datetime(realtime['QuestionnaireDate'], errors='coerce').dt.date <= historical_date
+                    (pd.to_datetime(realtime['QuestionnaireDate'], errors='coerce').dt.date <= historical_date)
                     ]
                     sum_responses = len(historical_data)
 
