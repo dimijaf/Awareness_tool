@@ -87,6 +87,8 @@ for i, sheet_name in enumerate(SHEETS.keys()):
 
             for date_str in dates_10days:
                 date_avg = pd.Series(0.0, index=df_t.columns, name=f'Avg_{date_str}')
+                historical_date = datetime.strptime(date_str, '%m/%d/%y').date()
+    
                 for col in df_t.columns:
                     device_id = str(df_t.loc['DeviceId', col]).strip()
                     install_date_str = str(df_t.loc['Installed Day', col]).strip()
