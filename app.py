@@ -91,9 +91,8 @@ for i, sheet_name in enumerate(SHEETS.keys()):
                     device_id = str(df_t.loc['DeviceId', col]).strip()
                     install_date_str = str(df_t.loc['Installed Day', col]).strip()
                     try:
-                        historical_date = datetime.strptime(date_str, '%m/%d/%y').date()
                         install_date = datetime.strptime(install_date_str, '%m/%d/%y').date()
-                        days_up_to_date = max((historical_date - install_date).days, 1)
+                        days_installed_then = max((historical_date - install_date).days, 1)
                     except:
                         days_up_to_date = 1
 
