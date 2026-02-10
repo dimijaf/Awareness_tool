@@ -109,13 +109,6 @@ for i, sheet_name in enumerate(SHEETS.keys()):
                
                 df_t.loc[f'Avg_{date_str}'] = date_avg
 
-            styled_df = df_t.style.set_properties(
-                **{
-                    'background-color': 'black',
-                    'color': 'white',
-                    'font-weight': 'bold'
-                }
-            )
             styled_df = (df_t.style.set_properties(
                 **{
                     'background-color': 'black',
