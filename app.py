@@ -115,7 +115,7 @@ for i, sheet_name in enumerate(SHEETS.keys()):
                     'color': 'white',
                     'font-weight': 'bold'
                 }
-            ).format(precision=2))9089iubgyu jhm  htfghjf hjf hfg
+            ).format(precision=2))
             st.dataframe(
                 styled_df,
                 height=1000,
