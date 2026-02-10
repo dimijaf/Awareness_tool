@@ -130,10 +130,10 @@ for i, sheet_name in enumerate(SHEETS.keys()):
                 styled_df,
                 #height=1000,
                 use_container_width=True,
-                column_config={
-                    col: st.column_config.Column(width="small") 
-                    for col in df_t.columns
-                }
+                #column_config={
+                    #col: st.column_config.Column(width="small") 
+                   # for col in df_t.columns
+                #}
             )
 
 
