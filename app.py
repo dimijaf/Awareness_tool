@@ -116,13 +116,11 @@ for i, sheet_name in enumerate(SHEETS.keys()):
                     'font-weight': 'bold'
                 }
             )
-            st.dataframe(
-                styled_df, 
-                height=1000, 
-                use_container_width=True,
-                column_config={
-                    col: st.column_config.Column(width="small") 
-                    for col in df_t.columns
+            styled_df = (df_t.style.set_properties(
+                **{
+                    'background-color': 'black',
+                    'color': 'white',
+                    'font-weight': 'bold'
                 }
             ).format({col: '{:.2f}' for col in df_t.columns if 'Avg_' in col or col == 'Average'}))
         if sheet_name == "Questions":
