@@ -83,7 +83,7 @@ for i, sheet_name in enumerate(SHEETS.keys()):
             
             from datetime import timedelta
             today = datetime.now().date()
-            dates_5days = [(today - timedelta(days=10*i)).strftime('%d/%m/%y') for i in range(10)]
+            dates_10days = [(today - timedelta(days=10*i)).strftime('%m/%d/%y') for i in range(10)]
 
             for date_str in dates_10days:
                 date_avg = pd.Series(0.0, index=df_t.columns, name=f'Avg_{date_str}')
