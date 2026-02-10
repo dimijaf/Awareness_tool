@@ -91,19 +91,19 @@ for i, sheet_name in enumerate(SHEETS.keys()):
                     try:
                         historical_date = datetime.strptime(date_str, '%d/%m/%y').date()
                         install_date = datetime.strptime(install_date_str, '%d/%m/%y').date()
-                        days_up_to_date = (historical_date - install_date).days
+                        days_up_to_date = max((historical_date - install_date).days, 1)
                     except:
-                        days_up_to_date = 0
+                        days_up_to_date = 1
                     
                     historical_data = realtime[
                         (realtime['DeviceId'].astype(str) == device_id) & 
                         (realtime['QuestionnaireDate'].str.contains(date_str))
                     ]
                     cum_sum = len(historical_data)
-                if days_up_to_date > 0:
-                    date_avg[col] = round(cum_sum / days_up_to_date, 3)
-                else:
-                    date_avg[col] = 0
+                    if days_up_to_date > 0:
+                        date_avg[col] = round(cum_sum / days_up_to_date, 3)
+                    else:
+                        date_avg[col] = 0
 
 
                
