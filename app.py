@@ -103,7 +103,8 @@ for i, sheet_name in enumerate(SHEETS.keys()):
                     historical_data = realtime[
                         (realtime['DeviceId'].astype(str) == device_id) &
                         (pd.to_datetime(realtime['QuestionnaireDate'], errors='coerce').dt.date
-                    historical_date) 
+                    historical_date)
+                    ]
                     sum_up_to_date = len(historical_data)
                     
                     try:
