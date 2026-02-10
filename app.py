@@ -102,7 +102,7 @@ for i, sheet_name in enumerate(SHEETS.keys()):
                     cum_sum = len(historical_data)
                     date_avg[col] = round(cum_sum / days_up_to_date, 3) if days_up_to_date > 0 else 0
 
-            else 0
+
                
                 df_t.loc[f'Avg_{date_str}'] = date_avg
 
