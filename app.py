@@ -115,7 +115,7 @@ for i, sheet_name in enumerate(SHEETS.keys()):
                     'color': 'white',
                     'font-weight': 'bold'
                 }
-            ).format({col: '{:.2f}' for col in df_t.columns if 'Avg_' in col or col == 'Average'}))
+            ).format(precision=2))9089iubgyu jhm  htfghjf hjf hfg
             st.dataframe(
                 styled_df,
                 height=1000,
