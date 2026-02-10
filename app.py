@@ -124,7 +124,7 @@ for i, sheet_name in enumerate(SHEETS.keys()):
                     col: st.column_config.Column(width="small") 
                     for col in df_t.columns
                 }
-            )
+            ).format({col: '{:.2f}' for col in df_t.columns if 'Avg_' in col or col == 'Average'}))
         if sheet_name == "Questions":
             realtime = st.session_state["RealTime"]
             question_names = df['Question number'].tolist()
