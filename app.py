@@ -128,7 +128,7 @@ for i, sheet_name in enumerate(SHEETS.keys()):
             ).format(precision=2))
             st.dataframe(
                 styled_df,
-                height=1000,
+                #height=1000,
                 use_container_width=True,
                 column_config={
                     col: st.column_config.Column(width="small") 
@@ -136,6 +136,10 @@ for i, sheet_name in enumerate(SHEETS.keys()):
                 }
             )
 
+
+
+
+        
         if sheet_name == "Questions":
             realtime = st.session_state["RealTime"]
             question_names = df['Question number'].tolist()
