@@ -69,7 +69,7 @@ for i, sheet_name in enumerate(SHEETS.keys()):
                     dates = pd.to_datetime(matching_rows['QuestionnaireDate'], errors='coerce')
                     max_date = dates.max()
                     if pd.notna(max_date):
-                        last_seen_row[device_id] = max_date.strftime('%m/%d/%y')
+                        last_seen_row[device_id] = max_date.strftime('%d/%m/%y')
                     else:
                         last_seen_row[device_id] = 'No date'
             df_t.loc['Last Seen'] = last_seen_row
