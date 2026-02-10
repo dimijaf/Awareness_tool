@@ -44,7 +44,7 @@ for i, sheet_name in enumerate(SHEETS.keys()):
             errors='coerce'
         ).dt.strftime('%d/%m/%y')
         st.session_state["Report"]['Installed Day'] = pd.to_datetime(
-            st.session_state["RealTime"]['Installed Day'], 
+            st.session_state["Report"]['Installed Day'], 
             errors='coerce'
         ).dt.strftime('%d/%m/%y')
         if sheet_name == "Report":
