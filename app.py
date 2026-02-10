@@ -83,7 +83,7 @@ for i, sheet_name in enumerate(SHEETS.keys()):
             
             from datetime import timedelta
             today = datetime.now().date()
-            dates_10days = [(today - timedelta(days=10*i)).strftime('%m/%d/%y') for i in range(10)]
+            dates_10days = [(today - timedelta(days=10*i)).strftime('%d/%m/%y') for i in range(10)]
 
   
             for date_str in dates_10days:
@@ -97,8 +97,8 @@ for i, sheet_name in enumerate(SHEETS.keys()):
                     sum_up_to_date = len(historical_data)
                     install_date_str = str(df_t.loc['Installed Day', col]).strip()
                     try:
-                        install_date = datetime.strptime(install_date_str, '%m/%d/%y').date()
-                        historical_date = datetime.strptime(date_str, '%m/%d/%y').date()
+                        install_date = datetime.strptime(install_date_str, '%d/%m/%y').date()
+                        historical_date = datetime.strptime(date_str, '%d/%m/%y').date()
                         days_installed = max((historical_date - install_date).days, 1)
                     except:
                         days_installed = 1
