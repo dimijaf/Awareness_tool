@@ -100,7 +100,7 @@ for i, sheet_name in enumerate(SHEETS.keys()):
                         (realtime['QuestionnaireDate'].str.contains(date_str))
                     ]
                     cum_sum = len(historical_data)
-                    if days_up_to_date > 1:
+                    if days_up_to_date > 0:
                         date_avg[col] = round(cum_sum / days_up_to_date, 3)
                     else:
                         date_avg[col] = 0
