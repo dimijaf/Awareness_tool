@@ -78,6 +78,23 @@ for i, sheet_name in enumerate(SHEETS.keys()):
                 pd.to_numeric(df_t.loc["Days Installed"], errors="coerce")
             ).round(3)
             df_t.loc['Average'] = avg_row
+            from datetime import timedelta
+            today = datetime.now().date()
+            dates_5days = [(today - timedelta(days=5*i)).strftime('%d/%m/%y') for i in range(8)]
+
+
+            for date_str in dates_5days:
+                date_avg = pd.Series(0, index=df_t.columns, name=f'Avg_{date_str}')
+                for col in df_t.columns:
+                    device_id = str(df_t.loc['DeviceId', col]).strip()
+                    date_data = realtime[
+                        (realtime['DeviceId'].astype(str) == device_id) & 
+                        (realtime['QuestionnaireDate'].str.contains(date_str))
+                    ]
+                    if not date_data.empty:
+                        date_avg[col] = len(date_data)
+                df_t.loc[f'Avg_{date_str}'] = date_avg
+
             styled_df = df_t.style.set_properties(
                 **{
                     'background-color': 'black',
