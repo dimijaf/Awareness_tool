@@ -77,7 +77,7 @@ for i, sheet_name in enumerate(SHEETS.keys()):
                 pd.to_numeric(df_t.loc["Sum"], errors="coerce") /
                 pd.to_numeric(df_t.loc["Days Installed"], errors="coerce")
             ).round(3)
-            df_t.loc['Average'] = avg_row
+            df_t.loc['Avg_today'] = avg_row
             from datetime import timedelta
             today = datetime.now().date()
             dates_5days = [(today - timedelta(days=5*i)).strftime('%d/%m/%y') for i in range(8)]
@@ -101,7 +101,7 @@ for i, sheet_name in enumerate(SHEETS.keys()):
                     ]
                     cum_sum = len(historical_data)
                     if days_up_to_date > 0:
-                        date_avg[col] = round(cum_sum / days_up_to_date, 3)
+                        date_avg[col] = round(cum_sum / days_up_to_date, 2)
                     else:
                         date_avg[col] = 0
 
