@@ -56,7 +56,10 @@ for i, sheet_name in enumerate(SHEETS.keys()):
                     try:
                         days_row[col] = (datetime.now() - pd.to_datetime(date_str)).days
                     except:
-                        pass
+                        try:
+                            days_row[col] = (datetime.now() - pd.to_datetime(date_str)).days
+                        except:
+                            pass
             df_t.loc['Days Installed'] = days_row
             realtime = st.session_state["RealTime"]
             last_seen_row = pd.Series('', index=df_t.columns, name='Last Seen')
