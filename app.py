@@ -114,7 +114,7 @@ for i, sheet_name in enumerate(SHEETS.keys()):
                     
                     
 
-                    date_avg[col] = round(sum_responses / days_installed_then, 2)
+                    date_avg[col] = round(responses_that_day / days_installed, 2)
 
                
                 df_t.loc[f'Avg_{date_str}'] = date_avg
