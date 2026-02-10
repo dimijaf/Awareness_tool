@@ -96,17 +96,15 @@ for i, sheet_name in enumerate(SHEETS.keys()):
                         days_up_to_date = max((historical_date - install_date).days, 1)
                     except:
                         days_up_to_date = 1
-                    
-                    historical_data = realtime[
-                        (realtime['DeviceId'].astype(str) == device_id) & 
-                        (realtime['QuestionnaireDate'].str.contains(date_str))
-                    ]
-                    cum_sum = len(historical_data)
-                    if days_up_to_date > 0:
-                        date_avg[col] = round(cum_sum / days_up_to_date, 2)
-                    else:
-                        date_avg[col] = 0
 
+
+                    historical_data = realtime[
+                    (realtime['DeviceId'].astype(str) == device_id) & 
+                    pd.to_datetime(realtime['QuestionnaireDate'], errors='coerce').dt.date <= historical_date
+                    ]
+                    sum_responses = len(historical_data)
+
+                    date_avg[col] = round(sum_responses / days_installed_then, 2)
 
                
                 df_t.loc[f'Avg_{date_str}'] = date_avg
