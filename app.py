@@ -39,14 +39,14 @@ for i, sheet_name in enumerate(SHEETS.keys()):
         if sheet_name == "RealTime":
             st.dataframe(df, use_container_width=True)
     
-        st.session_state["RealTime"]['QuestionnaireDate'] = pd.to_datetime(
-            st.session_state["RealTime"]['QuestionnaireDate'], 
-            errors='coerce'
-        ).dt.strftime('%d/%m/%y')
-        st.session_state["Report"]['Installed Day'] = pd.to_datetime(
-            st.session_state["Report"]['Installed Day'], 
-            errors='coerce'
-        ).dt.strftime('%d/%m/%y')
+        #st.session_state["RealTime"]['QuestionnaireDate'] = pd.to_datetime(
+         #   st.session_state["RealTime"]['QuestionnaireDate'], 
+          #  errors='coerce'
+        #).dt.strftime('%d/%m/%y')
+        #st.session_state["Report"]['Installed Day'] = pd.to_datetime(
+         #   st.session_state["Report"]['Installed Day'], 
+          #  errors='coerce'
+        #).dt.strftime('%d/%m/%y')
         if sheet_name == "Report":
             counts = st.session_state["RealTime"]["DeviceId"].astype(str).value_counts()
             df_t = df.T.copy()
