@@ -43,10 +43,10 @@ for i, sheet_name in enumerate(SHEETS.keys()):
          #   st.session_state["RealTime"]['QuestionnaireDate'], 
           #  errors='coerce'
         #).dt.strftime('%d/%m/%y')
-        #st.session_state["Report"]['Installed Day'] = pd.to_datetime(
-         #   st.session_state["Report"]['Installed Day'], 
-          #  errors='coerce'
-        #).dt.strftime('%d/%m/%y')
+        st.session_state["Report"]['Installed Day'] = pd.to_datetime(
+            st.session_state["Report"]['Installed Day'], 
+            errors='coerce'
+        ).dt.strftime('%d/%m/%y')
         if sheet_name == "Report":
             counts = st.session_state["RealTime"]["DeviceId"].astype(str).value_counts()
             df_t = df.T.copy()
