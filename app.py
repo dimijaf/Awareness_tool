@@ -66,6 +66,8 @@ for i, sheet_name in enumerate(SHEETS.keys()):
                             pass
             df_t.loc['Days Installed'] = days_row
             realtime = st.session_state["RealTime"]
+            realtime['QuestionnaireDate_parsed'] = pd.to_datetime(realtime['QuestionnaireDate'], errors='coerce')
+
             last_seen_row = pd.Series('', index=df_t.columns, name='Last Seen')
             device_ids_row = df_t.loc['DeviceId']  # Exact row name
             
@@ -73,7 +75,7 @@ for i, sheet_name in enumerate(SHEETS.keys()):
                 device_id_val = str(device_ids_row[device_id]).strip()
                 matching_rows = realtime[realtime['DeviceId'].astype(str).str.strip() == device_id_val]
                 if not matching_rows.empty:
-                    dates = pd.to_datetime(matching_rows['QuestionnaireDate'], errors='coerce')
+                    dates = pd.to_datetime(matching_rows['QuestionnaireDate_parsed'], errors='coerce')
                     max_date = dates.max()
                     if pd.notna(max_date):
                         last_seen_row[device_id] = max_date.strftime('%d/%m/%y')
