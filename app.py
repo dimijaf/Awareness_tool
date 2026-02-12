@@ -197,8 +197,6 @@ for i, sheet_name in enumerate(["Report", "RealTime", "Questions", "Graph"]):
         
 
 
-
-for avg_col in avg_cols:
             
 
     
