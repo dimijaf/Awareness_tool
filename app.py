@@ -10,7 +10,8 @@ st.set_page_config(layout="wide")
 SHEETS = {
     "Report": "https://gist.githubusercontent.com/dimijaf/41ded8133ff12eceb0f18138a0073df7/raw/eeb35a5364e945ea77bb4dc72cefe7272171a9cd/gistfile1.txt",
     "RealTime": "https://awarenesstool.azurewebsites.net/api/DatabaseBridge/GetAllReport?s=2hp2wNIDkzVgfwxak5719VtGn8FE1VQG90KHuh1tjJsOYjNI",
-    "Questions": "https://gist.githubusercontent.com/dimijaf/3d4725c7b69e825eb5f41c2cf41487ce/raw/ada86adb2239795890c5b3fa8d937993778d6764/gistfile1.txt"
+    "Questions": "https://gist.githubusercontent.com/dimijaf/3d4725c7b69e825eb5f41c2cf41487ce/raw/ada86adb2239795890c5b3fa8d937993778d6764/gistfile1.txt",
+    "Graph": None
 }
 def load_data(url):
     r = requests.get(url)
@@ -137,11 +138,11 @@ for i, sheet_name in enumerate(SHEETS.keys()):
                    # for col in df_t.columns
                 #}
             )
+            st.session_state["Report_df_t"] = df_t
 
 
 
-
-        
+          
         if sheet_name == "Questions":
             realtime = st.session_state["RealTime"]
             question_names = df['Question number'].tolist()
@@ -161,10 +162,26 @@ for i, sheet_name in enumerate(SHEETS.keys()):
                     df.loc[idx, 'NAI_%'] = round((nai_count / total_count * 100), 2) if total_count > 0 else 0
             
             st.dataframe(df, use_container_width=True, height=600)
-#url = SHEETS[sheet_name]
+#
 
 
-####df = st.session_state[sheet_name]
+
+        if sheet_name == "Cities":
+            df_t = st.session_state.get("Report_df_t")
+            if df_t is not None:
+                city_avg = (
+                    pd.DataFrame({
+                        "City": df_t.loc["City"],
+                        "Avg_today": df_t.loc["Avg_today"]
+                    })
+                    .dropna(subset=["City"])
+                    .groupby("City")["Avg_today"]
+                    .mean()
+                    .sort_values(ascending=False)
+                )
+                st.bar_chart(city_avg)
+                st.dataframe(city_avg.reset_index(), use_container_width=True)
+               
 
 
 
