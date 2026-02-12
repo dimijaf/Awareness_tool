@@ -175,19 +175,23 @@ for i, sheet_name in enumerate(["Report", "RealTime", "Questions", "Graph"]):
         if sheet_name == "Graph":
             df_t = st.session_state.get("Report_df_t")
             if df_t is not None:
-                city_avg = (
-                    pd.DataFrame({
-                        "City": df_t.loc["City"],
-                        "Avg_today": df_t.loc["Avg_today"]
-                    })
-                    .dropna(subset=["City"])
-                    .groupby("City")["Avg_today"]
-                    .mean()
-                    .sort_values(ascending=False)
-                )
-                st.bar_chart(city_avg)
-                st.dataframe(city_avg.reset_index(), use_container_width=True)
-               
+                avg_rows = [col for col in df_t.index if 'Avg' in col]
+                cities = df_t.loc["City"].dropna().unique()
+                chart_data = pd.DataFrame(index=cities)
+                for avg_col in avg_rows:
+                    city_avg = (
+                        pd.DataFrame({
+                            "City": df_t.loc["City"],
+                            avg_col: df_t.loc[avg_col]
+                        })
+                        .dropna(subset=["City"])
+                        .groupby("City")[avg_col]
+                        .mean()
+                    )
+                    chart_data[avg_col] = city_avg.reindex(cities).fillna(0)
+        
+                st.line_chart(chart_data)
+                st.dataframe(chart_data)[cite:22]
 
 
 
