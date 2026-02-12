@@ -184,7 +184,7 @@ for i, sheet_name in enumerate(["Report", "RealTime", "Questions", "Graph"]):
         
         
                 st.bar_chart(chart_data, use_container_width=True)
-                st.dataframe(chart_data.reset_index(names='City'))[cite:22]
+                st.dataframe(chart_data.reset_index(names='City'))
             
         
                 #st.bar_chart(chart_data, x_label="Cities", y_label="Avg")
