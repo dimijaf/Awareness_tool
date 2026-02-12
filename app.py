@@ -191,7 +191,7 @@ for i, sheet_name in enumerate(["Report", "RealTime", "Questions", "Graph"]):
                     if avg_col in df_t.index:
                         chart_data[avg_col] = df_t.loc[avg_col][cities.index]
                         
-                st.bar_chart(chart_data.set_index('City').T, use_container_width=True, stack=False)
+                st.bar_chart(chart_data.set_index('City'), use_container_width=True, stack=False)
 
 
 
