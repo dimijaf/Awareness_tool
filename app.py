@@ -187,7 +187,7 @@ for i, sheet_name in enumerate(["Report", "RealTime", "Questions", "Graph"]):
 
         if sheet_name == "Graph":
             df_t = st.session_state.get("Report_df_t")
-            df_t = df_t[~df_t.index.str.startswith("Avg_")]   
+              
             if df_t is not None:
                 cities = df_t.loc['City'].dropna()
         
@@ -215,7 +215,7 @@ for i, sheet_name in enumerate(["Report", "RealTime", "Questions", "Graph"]):
                 chart_data = chart_data.copy()
         
                 
-                st.write("FINAL COL ORDER:", chart_data.columns.tolist())
+                #st.write("FINAL COL ORDER:", chart_data.columns.tolist())
         
            
                 st.bar_chart(chart_data.set_index('City'),use_container_width=True, stack=False)
