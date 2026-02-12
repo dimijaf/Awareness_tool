@@ -181,7 +181,7 @@ for i, sheet_name in enumerate(["Report", "RealTime", "Questions", "Graph"]):
             if df_t is not None:
                 cities = df_t.loc['City'].dropna()
                 avg_cols = ['Avg_today']
-                for i in range(2, 10):
+                for i in range(9, 1, -1):
                     date_str = (datetime.now().date() - timedelta(days=10*i)).strftime('%d/%m/%y')
                     avg_cols.append(f'Avg_{date_str}')
                 
