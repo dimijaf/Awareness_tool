@@ -22,9 +22,9 @@ for name, url in SHEETS.items():
         st.session_state[name] = load_data(url)
 
 #sheet_name = st.selectbox("Select Sheet", list(SHEETS.keys()))
-
 tabs = st.tabs(["Report", "RealTime", "Questions", "Graph"])
-for i, sheet_name in enumerate(SHEETS.keys()):
+
+for i, sheet_name in enumerate(["Report", "RealTime", "Questions", "Graph"]):
     with tabs[i]:
         url = SHEETS[sheet_name]
 
