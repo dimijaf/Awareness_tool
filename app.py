@@ -10,8 +10,7 @@ st.set_page_config(layout="wide")
 SHEETS = {
     "Report": "https://gist.githubusercontent.com/dimijaf/41ded8133ff12eceb0f18138a0073df7/raw/eeb35a5364e945ea77bb4dc72cefe7272171a9cd/gistfile1.txt",
     "RealTime": "https://awarenesstool.azurewebsites.net/api/DatabaseBridge/GetAllReport?s=2hp2wNIDkzVgfwxak5719VtGn8FE1VQG90KHuh1tjJsOYjNI",
-    "Questions": "https://gist.githubusercontent.com/dimijaf/3d4725c7b69e825eb5f41c2cf41487ce/raw/ada86adb2239795890c5b3fa8d937993778d6764/gistfile1.txt",
-    "Graph": None
+    "Questions": "https://gist.githubusercontent.com/dimijaf/3d4725c7b69e825eb5f41c2cf41487ce/raw/ada86adb2239795890c5b3fa8d937993778d6764/gistfile1.txt"
 }
 def load_data(url):
     r = requests.get(url)
@@ -24,8 +23,7 @@ for name, url in SHEETS.items():
 
 #sheet_name = st.selectbox("Select Sheet", list(SHEETS.keys()))
 
-tabs = st.tabs(list(SHEETS.keys()))
-
+tabs = st.tabs(["Report", "RealTime", "Questions", "Graph"])
 for i, sheet_name in enumerate(SHEETS.keys()):
     with tabs[i]:
         url = SHEETS[sheet_name]
@@ -166,7 +164,7 @@ for i, sheet_name in enumerate(SHEETS.keys()):
 
 
 
-        if sheet_name == "Cities":
+        if sheet_name == "Graph":
             df_t = st.session_state.get("Report_df_t")
             if df_t is not None:
                 city_avg = (
