@@ -178,13 +178,22 @@ for i, sheet_name in enumerate(["Report", "RealTime", "Questions", "Graph"]):
             if df_t is not None:
                 cities = df_t.loc['City'].dropna()
                 avg_cols = ['Avg_today']
-                date_cols = sorted([col for col in df_t.index if col.startswith('Avg_') and col != 'Avg_today'],
-                                   key=lambda x: datetime.strptime(x.split('_')[1], '%d/%m/%y'))
-                avg_cols.extend(date_cols)
+                for i in range(2, 10):
+                    date_str = (datetime.now().date() - timedelta(days=10*i)).strftime('%d/%m/%y')
+                    avg_cols.append(f'Avg_{date_str}')
+                
+            
                 chart_data = pd.DataFrame({'City': cities.values})
                 for avg_col in avg_cols:
-                    chart_data[avg_col] = df_t.loc[avg_col][cities.index]
+                    if avg_col in df_t.index:
+                        chart_data[avg_col] = df_t.loc[avg_col][cities.index]
+                        
                 st.bar_chart(chart_data.set_index('City'), use_container_width=True, stack=False)
+
+
+
+
+
 
 
     
