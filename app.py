@@ -179,25 +179,14 @@ for i, sheet_name in enumerate(["Report", "RealTime", "Questions", "Graph"]):
                 cities = df_t.loc['City'].dropna()
                 chart_data = pd.DataFrame(index=cities.values)
                 for avg_col in avg_cols:
-                    cities = df_t.loc['City'].dropna()
-                    city_avg = (
-                        pd.DataFrame({
-                            "City": cities,
-                            avg_col: df_t.loc[avg_col][cities.index]
-                        })
-                        .groupby("City")[avg_col]
-                        .mean()
-                        .sort_values(ascending=False)
-                    )
-                    st.subheader(avg_col)
-                    st.bar_chart(city_avg)
-        
-                #st.bar_chart(chart_data, x_label="Cities", y_label="Avg")
+                    chart_data[avg_col] = df_t.loc[avg_col][cities.index]
+                    
+                st.bar_chart(chart_data.T)  # .T makes dates on X-axis        
+        #st.bar_chart(chart_data, x_label="Cities", y_label="Avg")
                 #st.dataframe(chart_data)[cite:22]
         
 
 
-            
 
     
     
