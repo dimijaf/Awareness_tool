@@ -175,24 +175,17 @@ for i, sheet_name in enumerate(["Report", "RealTime", "Questions", "Graph"]):
         if sheet_name == "Graph":
             df_t = st.session_state.get("Report_df_t")
             if df_t is not None:
-                avg_rows = [col for col in df_t.index if 'Avg' in col]
-                cities = df_t.loc["City"].dropna().unique()
-                chart_data = pd.DataFrame(index=cities)
-                for avg_col in avg_rows:
-                    city_avg = (
-                        pd.DataFrame({
-                            "City": df_t.loc["City"],
-                            avg_col: df_t.loc[avg_col]
-                        })
-                        .dropna(subset=["City"])
-                        .groupby("City")[avg_col]
-                        .mean()
-                        .sort_values(ascending=False)
-                    )
-                    st.subheader(avg_col)
-                    st.bar_chart(city_avg)
-                    st.dataframe(city_avg.reset_index(name=avg_col), use_container_width=True)
-                    #chart_data[avg_col] = city_avg.reindex(cities).fillna(0)
+                avg_cols = [col for col in df_t.index if 'Avg' in col]
+                cities = df_t.loc['City'].dropna()
+                chart_data = pd.DataFrame(index=cities.values)
+                for avg_col in avg_cols:
+                    avgs = df_t.loc[avg_col][cities.index]
+                    chart_data[avg_col] = avgs
+        
+        
+                st.bar_chart(chart_data, use_container_width=True)
+                st.dataframe(chart_data.reset_index(names='City'))[cite:22]
+            
         
                 #st.bar_chart(chart_data, x_label="Cities", y_label="Avg")
                 #st.dataframe(chart_data)[cite:22]
