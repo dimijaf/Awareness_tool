@@ -148,7 +148,10 @@ for i, sheet_name in enumerate(["Report", "RealTime", "Questions", "Graph"]):
 
 
 
-          
+        if sheet_name == "RealTime":
+            df = st.session_state["RealTime"]
+            st.dataframe(df, use_container_width=True)  
+            
         if sheet_name == "Questions":
             realtime = st.session_state["RealTime"]
             question_names = df['Question number'].tolist()
