@@ -176,9 +176,10 @@ for i, sheet_name in enumerate(["Report", "RealTime", "Questions", "Graph"]):
         if sheet_name == "Graph":
             df_t = st.session_state.get("Report_df_t")
             if df_t is not None:
-                avg_cols = sorted([col for col in df_t.index if 'Avg' in col], 
-                                  key=lambda x: 'today' in x.lower() or datetime.strptime(x.split('_')[1], '%d/%m/%y').date(), reverse=True)
                 cities = df_t.loc['City'].dropna()
+                avg_cols = sorted([col for col in df_t.index if 'Avg' in col], 
+                                  key=lambda x: 0 if x == 'Avg_today' else 1)
+                
                 chart_data = pd.DataFrame({'City': cities.values})
                 for avg_col in avg_cols:
                     chart_data[avg_col] = df_t.loc[avg_col][cities.index]
