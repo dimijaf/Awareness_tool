@@ -187,11 +187,15 @@ for i, sheet_name in enumerate(["Report", "RealTime", "Questions", "Graph"]):
                         .dropna(subset=["City"])
                         .groupby("City")[avg_col]
                         .mean()
+                        .sort_values(ascending=False)
                     )
-                    chart_data[avg_col] = city_avg.reindex(cities).fillna(0)
+                    st.subheader(avg_col)
+                    st.bar_chart(city_avg)
+                    st.dataframe(city_avg.reset_index(name=avg_col), use_container_width=True)[cite:22]
+                    #chart_data[avg_col] = city_avg.reindex(cities).fillna(0)
         
-                st.bar_chart(chart_data, x_label="Cities", y_label="Avg")
-                st.dataframe(chart_data)[cite:22]
+                #st.bar_chart(chart_data, x_label="Cities", y_label="Avg")
+                #st.dataframe(chart_data)[cite:22]
         
 
 
