@@ -26,17 +26,25 @@ tabs = st.tabs(["Report", "RealTime", "Questions", "Graph"])
 
 for i, sheet_name in enumerate(["Report", "RealTime", "Questions", "Graph"]):
     with tabs[i]:
-        url = SHEETS[sheet_name]
+        if sheet_name in SHEETS:  # Only for sheets with data URLs
+            if st.button(f"🔄 Refresh {sheet_name}", key=f"refresh_{sheet_name}"):
+                st.session_state[sheet_name] = load_data(SHEETS[sheet_name])
+            df = st.session_state[sheet_name]
+        
+        
+        
+        
+        ###url = SHEETS[sheet_name]
 
-        if sheet_name not in st.session_state:
-            st.session_state[sheet_name] = load_data(url)
+        #if sheet_name not in st.session_state:
+         #   st.session_state[sheet_name] = load_data(url)
 
-        if st.button(f"🔄 Refresh {sheet_name}", key=f"refresh_{sheet_name}"):
-            st.session_state[sheet_name] = load_data(url)
+        #if st.button(f"🔄 Refresh {sheet_name}", key=f"refresh_{sheet_name}"):
+         #   st.session_state[sheet_name] = load_data(url)
 
-        df = st.session_state[sheet_name]
-        if sheet_name == "RealTime":
-            st.dataframe(df, use_container_width=True)
+        #df = st.session_state[sheet_name]
+        #if sheet_name == "RealTime":
+         #   st.dataframe(df, use_container_width=True)
     
         #st.session_state["RealTime"]['QuestionnaireDate'] = pd.to_datetime(
          #   st.session_state["RealTime"]['QuestionnaireDate'], 
