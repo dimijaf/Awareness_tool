@@ -190,8 +190,9 @@ for i, sheet_name in enumerate(["Report", "RealTime", "Questions", "Graph"]):
                     )
                     chart_data[avg_col] = city_avg.reindex(cities).fillna(0)
         
-                st.line_chart(chart_data)
+                st.bar_chart(chart_data, x_label="Cities", y_label="Avg")
                 st.dataframe(chart_data)[cite:22]
+        
 
 
 
