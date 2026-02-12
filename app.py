@@ -187,6 +187,7 @@ for i, sheet_name in enumerate(["Report", "RealTime", "Questions", "Graph"]):
 
         if sheet_name == "Graph":
             df_t = st.session_state.get("Report_df_t")
+            df_t = df_t[~df_t.index.str.startswith("Avg_")]   
             if df_t is not None:
                 cities = df_t.loc['City'].dropna()
         
