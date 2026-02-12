@@ -181,11 +181,9 @@ for i, sheet_name in enumerate(["Report", "RealTime", "Questions", "Graph"]):
                 for avg_col in avg_cols:
                     avgs = df_t.loc[avg_col][cities.index]
                     chart_data[avg_col] = avgs
-        
-        
                 st.bar_chart(chart_data, use_container_width=True)
-                st.dataframe(chart_data.reset_index(names='City'))
-            
+        # No table
+
         
                 #st.bar_chart(chart_data, x_label="Cities", y_label="Avg")
                 #st.dataframe(chart_data)[cite:22]
