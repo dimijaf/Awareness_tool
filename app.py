@@ -176,39 +176,39 @@ for i, sheet_name in enumerate(["Report", "RealTime", "Questions", "Graph"]):
 
 
         
+        
+
+
+
+
         if sheet_name == "Graph":
             df_t = st.session_state.get("Report_df_t")
             if df_t is not None:
                 cities = df_t.loc['City'].dropna()
-                avg_rows = [r for r in df_t.index if r.startswith('Avg_')]
+                avg_rows = [r for r in df_t.index if str(r).startswith('Avg_')]
                 def parse_avg(r):
+                    r = str(r).strip()
                     if r == 'Avg_today':
                         return datetime.now()
-                    return datetime.strptime(r.replace('Avg_', ''), '%d/%m/%y')
-                avg_cols = sorted(avg_rows, key=parse_avg)
-
-
-                
-                for i in range(9, 1, -1):
-                    date_str = (datetime.now().date() - timedelta(days=10*i)).strftime('%d/%m/%y')
-                    avg_cols.append(f'Avg_{date_str}')
-                    chart_data = pd.DataFrame({'City': cities.values})
-                    for avg_col in avg_cols:
-                        chart_data[avg_col] = df_t.loc[avg_col][cities.index]
-                
-            
+                    return pd.to_datetime(r.replace('Avg_', '').strip(), dayfirst=True, errors='coerce')
+        
+         
+                avg_map = {r: parse_avg(r) for r in avg_rows}
+        
+                avg_cols = sorted(avg_map, key=lambda k: avg_map[k])
+        
+           
                 chart_data = pd.DataFrame({'City': cities.values})
+        
                 for avg_col in avg_cols:
-                    if avg_col in df_t.index:
-                        chart_data[avg_col] = df_t.loc[avg_col][cities.index]
-                        
+                    chart_data[avg_col] = df_t.loc[avg_col][cities.index]
+        
+            
                 chart_data = chart_data[['City'] + avg_cols]
-                        
+        
+                st.write("AVG order:", avg_cols)
+        
+            
                 st.bar_chart(chart_data.set_index('City'), use_container_width=True, stack=False)
 
 
-
-
-
-
-  
