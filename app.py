@@ -183,7 +183,7 @@ for i, sheet_name in enumerate(["Report", "RealTime", "Questions", "Graph"]):
                 chart_data = pd.DataFrame({'City': cities.values})
                 for avg_col in avg_cols:
                     chart_data[avg_col] = df_t.loc[avg_col][cities.index]
-                st.bar_chart(chart_data.set_index('City'), use_container_width=True, stacked=False)
+                st.bar_chart(chart_data.set_index('City'), use_container_width=True, stack=False)
 
         
 
