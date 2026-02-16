@@ -139,12 +139,12 @@ for i, sheet_name in enumerate(["Report", "RealTime", "Questions", "Graph"]):
             
             
             st.dataframe(
-                df_t,
+                styled_df,
                 height=1000,
                 use_container_width=True,
                 column_config={
                     col: st.column_config.Column(width="10") 
-                    for col in df_t.columns
+                    for col in styled_df.columns
                 }
             )
             st.session_state["Report_df_t"] = df_t
