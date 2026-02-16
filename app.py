@@ -140,7 +140,7 @@ for i, sheet_name in enumerate(["Report", "RealTime", "Questions", "Graph"]):
             
             st.dataframe(
                 styled_df,
-                height=1000,
+                height=600,
                 use_container_width=True,
                 column_config={
                     col: st.column_config.Column(width="small") 
