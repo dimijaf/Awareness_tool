@@ -80,10 +80,10 @@ for i, sheet_name in enumerate(["Report", "RealTime", "Questions", "Graph"]):
                 date_str = str(installed_row[col]).strip()
                 if date_str and '/' in date_str:
                     try:
-                        days_row[col] = (datetime.now() - pd.to_datetime(date_str)).days
+                        days_row[col] = (datetime.now() - pd.to_datetime(date_str,dayfirst=True)).days
                     except:
                         try:
-                            days_row[col] = (datetime.now() - pd.to_datetime(date_str)).days
+                            days_row[col] = (datetime.now() - pd.to_datetime(date_str,dayfirst=True)).days
                         except:
                             pass
             df_t.loc['Days Installed'] = days_row
