@@ -68,7 +68,7 @@ for i, sheet_name in enumerate(["Report", "RealTime", "Questions", "Graph"]):
         st.session_state["Report"]['Installed Day'] = pd.to_datetime(
             st.session_state["Report"]['Installed Day'], 
             errors='coerce'
-        ).dt.strftime('%d/%m/%y')
+        ).dt.strftime('%m/%d/%y')
         if sheet_name == "Report":
             counts = st.session_state["RealTime"]["DeviceId"].astype(str).value_counts()
             df_t = df.T.copy()
