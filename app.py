@@ -158,7 +158,7 @@ for i, sheet_name in enumerate(["Report", "RealTime", "Questions", "Graph"]):
                 height=500,
                 use_container_width=True,
                 column_config={
-                    col: st.column_config.Column(width="small") 
+                    col: st.column_config.Column(width="120") 
                     for col in df_t.columns
                 }
             )
