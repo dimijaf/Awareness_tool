@@ -68,7 +68,7 @@ for i, sheet_name in enumerate(["Report", "RealTime", "Questions", "Graph"]):
         st.session_state["Report"]['Installed Day'] = pd.to_datetime(
             st.session_state["Report"]['Installed Day'], 
             errors='coerce'
-        ).dt.strftime('%m/%d/%y')
+        ).dt.strftime('%d/%m/%y')
         if sheet_name == "Report":
             counts = st.session_state["RealTime"]["DeviceId"].astype(str).value_counts()
             df_t = df.T.copy()
@@ -100,7 +100,7 @@ for i, sheet_name in enumerate(["Report", "RealTime", "Questions", "Graph"]):
                     dates = pd.to_datetime(matching_rows['QuestionnaireDate_parsed'], errors='coerce')
                     max_date = dates.max()
                     if pd.notna(max_date):
-                        last_seen_row[device_id] = max_date.strftime('%m/%d/%y')
+                        last_seen_row[device_id] = max_date.strftime('%d/%m/%y')
                     else:
                         last_seen_row[device_id] = 'No date'
             df_t.loc['Last Seen'] = last_seen_row
@@ -114,12 +114,12 @@ for i, sheet_name in enumerate(["Report", "RealTime", "Questions", "Graph"]):
             
             
             today = datetime.now().date()
-            dates_10days = [(today - timedelta(days=10*i)).strftime('%m/%d/%y') for i in range(2, 10)]
+            dates_10days = [(today - timedelta(days=10*i)).strftime('%d/%m/%y') for i in range(2, 10)]
 
   
             for date_str in dates_10days:
                 date_avg = pd.Series(0.0, index=df_t.columns, name=f'Avg_{date_str}')
-                historical_date = datetime.strptime(date_str, '%m/%d/%y').date()
+                historical_date = datetime.strptime(date_str, '%d/%m/%y').date()
                 for col in df_t.columns:
                     device_id = str(df_t.loc['DeviceId', col]).strip()
                     install_date_str = str(df_t.loc['Installed Day', col]).strip()
@@ -131,7 +131,7 @@ for i, sheet_name in enumerate(["Report", "RealTime", "Questions", "Graph"]):
                     sum_up_to_date = len(historical_data)
                     
                     try:
-                        install_date = datetime.strptime(install_date_str, '%m/%d/%y').date()
+                        install_date = datetime.strptime(install_date_str, '%d/%m/%y').date()
                         days_installed = max((historical_date - install_date).days, 1)
                     except:
                         days_installed = 1
