@@ -7,7 +7,10 @@ from io import StringIO
 st.logo("haleon_logo.png")
 
 st.markdown("""
-<h1><img src="haleon_logo.png" height="60"> Haleon Awareness Tool</h1>
+<h1 style="display: flex; align-items: center;">
+    <img src="haleon_logo.png" height="60" style="margin-right: 10px;">
+    Haleon Awareness Tool
+</h1>
 """, unsafe_allow_html=True)
 # Dictionary of sheet names 
 SHEETS = {
