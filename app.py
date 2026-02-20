@@ -66,7 +66,7 @@ for i, sheet_name in enumerate(["Report", "RealTime", "Questions", "Graph"]):
           #  errors='coerce'
         #).dt.strftime('%d/%m/%y')
         st.session_state["Report"]['Installed Day'] = pd.to_datetime(
-            st.session_state["Report"]['Installed Day'], 
+            st.session_state["Report"]['Installed Day'],dayfirst=True, 
             errors='coerce'
         ).dt.strftime('%d/%m/%y')
         if sheet_name == "Report":
