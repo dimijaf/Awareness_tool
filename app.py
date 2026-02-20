@@ -48,18 +48,7 @@ for i, sheet_name in enumerate(["Report", "RealTime", "Questions", "Graph"]):
                 st.session_state[sheet_name] = load_data(SHEETS[sheet_name])
             df = st.session_state[sheet_name]
         
-        
-  st.markdown("""
-<style>
-    /* Full browser width */
-    .main .block-container { padding-left: 0 !important; padding-right: 0 !important; }
-    section[data-testid="stHorizontalBlock"] { width: 100vw !important; margin: 0 !important; }
-    
-    /* Dataframe full width */
-    .dataframe { width: 100vw !important; overflow-x: auto; }
-    div[data-testid="column"]:has(.dataframe) { max-width: 100vw !important; }
-</style>
-""", unsafe_allow_html=True)
+ 
       
         
         ###url = SHEETS[sheet_name]
