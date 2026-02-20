@@ -1,4 +1,5 @@
 from datetime import datetime
+from datetime import timedelta
 import streamlit as st
 import pandas as pd
 import requests
@@ -97,7 +98,7 @@ for i, sheet_name in enumerate(["Report", "RealTime", "Questions", "Graph"]):
             
             
             
-            from datetime import timedelta
+            
             today = datetime.now().date()
             dates_10days = [(today - timedelta(days=10*i)).strftime('%d/%m/%y') for i in range(2, 10)]
 
