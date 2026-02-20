@@ -39,6 +39,22 @@ for name, url in SHEETS.items():
 #sheet_name = st.selectbox("Select Sheet", list(SHEETS.keys()))
 tabs = st.tabs(["Report", "RealTime", "Questions", "Graph"])
 
+
+st.markdown("""
+<style>
+    .block-container {
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+    section[data-testid="stHorizontalBlock"] {
+        width: 100%;
+        max-width: none;
+    }
+</style>
+""", unsafe_allow_html=True)
+
 for i, sheet_name in enumerate(["Report", "RealTime", "Questions", "Graph"]):
     with tabs[i]:
         if sheet_name in SHEETS:  # Only for sheets with data URLs
