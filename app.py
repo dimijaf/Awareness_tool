@@ -154,7 +154,7 @@ for i, sheet_name in enumerate(["Report", "RealTime", "Questions", "Graph"]):
             
             
             st.dataframe(
-                styled_df,
+                df_t,
                 height=500,
                 use_container_width=True,
                 column_config={
