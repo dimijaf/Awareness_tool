@@ -4,7 +4,7 @@ import streamlit as st
 import pandas as pd
 import requests
 from io import StringIO
-st.logo("haleon_logo.png")
+#st.logo("haleon_logo.png")
 
 st.markdown("""
 <h1 style="display: flex; align-items: center;">
