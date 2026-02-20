@@ -6,7 +6,7 @@ import requests
 from io import StringIO
 #st.logo("haleon_logo.png")
 
-col1, col2 = st.columns([1, 10])
+col1, col2 = st.columns([1, 14])
 
 with col1:
     st.image("haleon_logo.png", width=60)
