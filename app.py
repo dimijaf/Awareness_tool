@@ -40,20 +40,6 @@ for name, url in SHEETS.items():
 tabs = st.tabs(["Report", "RealTime", "Questions", "Graph"])
 
 
-st.markdown("""
-<style>
-    .block-container {
-        padding-top: 1rem;
-        padding-bottom: 1rem;
-        padding-left: 1rem;
-        padding-right: 1rem;
-    }
-    section[data-testid="stHorizontalBlock"] {
-        width: 100%;
-        max-width: none;
-    }
-</style>
-""", unsafe_allow_html=True)
 
 for i, sheet_name in enumerate(["Report", "RealTime", "Questions", "Graph"]):
     with tabs[i]:
@@ -174,7 +160,7 @@ for i, sheet_name in enumerate(["Report", "RealTime", "Questions", "Graph"]):
                 height=500,
                 use_container_width=True,
                 column_config={
-                    col: st.column_config.Column(width="120") 
+                    col: st.column_config.Column(width="large") 
                     for col in df_t.columns
                 }
             )
