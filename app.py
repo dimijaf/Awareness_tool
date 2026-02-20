@@ -6,12 +6,21 @@ import requests
 from io import StringIO
 #st.logo("haleon_logo.png")
 
-st.markdown("""
-<h1 style="display: flex; align-items: center;">
-    <img src="haleon_logo.png" height="60" style="margin-right: 10px;">
-    Haleon Awareness Tool
-</h1>
-""", unsafe_allow_html=True)
+col1, col2 = st.columns([1, 6])
+
+with col1:
+    st.image("haleon_logo.png", width=60)
+
+with col2:
+    st.markdown("## Haleon Awareness Tool")
+
+
+#st.markdown("""
+#<h1 style="display: flex; align-items: center;">
+ #   <img src="haleon_logo.png" height="60" style="margin-right: 10px;">
+  #  Haleon Awareness Tool
+#</h1>
+#""", unsafe_allow_html=True)
 # Dictionary of sheet names 
 SHEETS = {
     "Report": "https://gist.githubusercontent.com/dimijaf/41ded8133ff12eceb0f18138a0073df7/raw/eeb35a5364e945ea77bb4dc72cefe7272171a9cd/gistfile1.txt",
