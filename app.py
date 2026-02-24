@@ -119,31 +119,39 @@ for i, sheet_name in enumerate(["Report", "RealTime", "Questions", "Graph"]):
             dates_10days = [(today - timedelta(days=10*i)).strftime('%d/%m/%y') for i in range(2, 10)]
 
   
-            for date_str in dates_10days:
-                date_avg = pd.Series(0.0, index=df_t.columns, name=f'Avg_{date_str}')
-                historical_date = datetime.strptime(date_str, '%d/%m/%y').date()
+           
+            realtime['Month'] = realtime['QuestionnaireDate_parsed'].dt.to_period('M')
+            
+            for month in realtime['Month'].dropna().unique():
+                month_avg = pd.Series(0.0, index=df_t.columns, name=f'Avg_{month}')
+                month_end = month.to_timestamp('M').date()
+            
                 for col in df_t.columns:
                     device_id = str(df_t.loc['DeviceId', col]).strip()
                     install_date_str = str(df_t.loc['Installed Day', col]).strip()
-                    
+            
                     historical_data = realtime[
                         (realtime['DeviceId'].astype(str) == device_id) &
-                        (pd.to_datetime(realtime['QuestionnaireDate_parsed'],errors='coerce').dt.date <= historical_date)
+                        (realtime['Month'] <= month)
                     ]
-                    sum_up_to_date = len(historical_data)
-                    
+                    sum_up_to_month = len(historical_data)
+            
                     try:
                         install_date = datetime.strptime(install_date_str, '%d/%m/%y').date()
-                        days_installed = max((historical_date - install_date).days, 1)
+                        days_installed = max((month_end - install_date).days, 1)
                     except:
                         days_installed = 1
+            
+                    month_avg[col] = round(sum_up_to_month / days_installed, 2)
+
+                    df_t.loc[f'Avg_{month}'] = month_avg
                     
                     
 
-                    date_avg[col] = round(sum_up_to_date / days_installed, 2)
+                    #date_avg[col] = round(sum_up_to_date / days_installed, 2)
 
                
-                df_t.loc[f'Avg_{date_str}'] = date_avg
+                #df_t.loc[f'Avg_{date_str}'] = date_avg
 
             
             styled_df = (df_t.style.set_properties(
