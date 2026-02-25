@@ -1,3 +1,6 @@
+import os
+os.environ["STREAMLIT_BROWSER_GATHER_USAGE_STATS"] = "false"
+
 from datetime import datetime
 from datetime import timedelta
 import streamlit as st
