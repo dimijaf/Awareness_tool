@@ -1,9 +1,17 @@
+import streamlit as st
+
+st.set_page_config(
+    page_title="Haleon Awareness Tool",
+    layout="wide",
+    initial_sidebar_state="collapsed"
+)
+
 import os
 os.environ["STREAMLIT_BROWSER_GATHER_USAGE_STATS"] = "false"
 
 from datetime import datetime
 from datetime import timedelta
-import streamlit as st
+#import streamlit as st
 import pandas as pd
 import requests
 from io import StringIO
